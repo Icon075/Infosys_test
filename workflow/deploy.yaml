@@ -20,4 +20,9 @@ jobs:
           aws-secret-access-key: 
           aws-region: us-east-1
 
+      - name: Deploy CloudFormation Stack
+        run: |
+          aws cloudformation deploy \
+            --template-file templates/cft.yaml \
+
     
