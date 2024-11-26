@@ -22,6 +22,16 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name: Print CloudFormation Template
+        run: |
+          echo "Printing the CloudFormation template:"
+          cat template/cft.yaml
+
+      - name: Validate CloudFormation Template
+        run: |
+          aws cloudformation validate-template \
+            --template-body file://template/cft.yaml
+
       - name: Deploy CloudFormation Stack
         run: |
           aws cloudformation deploy \
