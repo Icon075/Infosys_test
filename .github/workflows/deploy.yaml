@@ -24,7 +24,7 @@ jobs:
         run: |
           aws cloudformation deploy \
             --template-file template/cft.yaml \
-            --stack-name MyLambdaFunction \
+            --stack-name LambdaFunctionStack \
             --capabilities CAPABILITY_NAMED_IAM
 
     
