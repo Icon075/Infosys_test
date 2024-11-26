@@ -1,4 +1,6 @@
----
+##--IAM Role--##
+##  https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
+
 AWSTemplateFormatVersion: "2010-09-09"
 Resources:
   MyLambdaRole:
@@ -13,3 +15,29 @@ Resources:
                 - lambda.amazonaws.com
             Action:
               - 'sts:AssumeRole'
+      Path: /
+      Policies:
+        - PolicyName: root
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: '*'
+                Resource: '*'
+
+
+MyLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Role: !GetAtt MyLambdaRole.Arn
+      Runtime: python3.9
+      Handler: index.lambda_handler
+      code:
+        ZipFile: |
+           def lambda_handler(event, context):
+               print(event)
+               return 'Hello World!'
+      Tags:
+        - Key: Name 
+          Value: MyLambdaFunction
+      
