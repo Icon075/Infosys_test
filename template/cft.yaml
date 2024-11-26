@@ -27,7 +27,7 @@ Resources:
 
 
 MyLambdaFunction:
-    Type: AWS::Lambda::Function
+    Type: 'AWS::Lambda::Function'
     Properties:
       Role: !GetAtt MyLambdaRole.Arn    #GetAtt- functn to get the arn property of the role
       Runtime: python3.9
@@ -37,7 +37,5 @@ MyLambdaFunction:
            def lambda_handler(event, context):
                print(event)
                return 'Hello World!'
-      Tags:
-        - Key: Name 
-          Value: MyLambdaFunction
+     
       
