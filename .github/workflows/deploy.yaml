@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      ACTIONS_STEP_DEBUG: true # Enables debug logging
 
     steps:
       - name: Checkout repository
