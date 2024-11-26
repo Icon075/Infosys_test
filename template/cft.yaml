@@ -1,6 +1,3 @@
-##--IAM Role--##
-##  https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-
 AWSTemplateFormatVersion: "2010-09-09"
 Resources:
   MyLambdaRole:
@@ -17,26 +14,25 @@ Resources:
               - 'sts:AssumeRole'
       Path: /
       Policies:
-        - PolicyName: root
+        - PolicyName: LambdaBasicExecutionPolicy
           PolicyDocument:
             Version: "2012-10-17"
             Statement:
               - Effect: Allow
-                Action: '*'
-                Resource: '*'
+                Action:
+                  - 'logs:CreateLogGroup'
+                  - 'logs:CreateLogStream'
+                  - 'logs:PutLogEvents'
+                Resource: "*"
 
-
-MyLambdaFunction:
+  MyLambdaFunction:
     Type: 'AWS::Lambda::Function'
     Properties:
-      #Role: !GetAtt MyLambdaRole.Arn    #GetAtt- functn to get the arn property of the role
-      Role: !Ref MyLambdaRole
+      Role: !GetAtt MyLambdaRole.Arn
       Runtime: python3.9
       Handler: index.lambda_handler
       Code:
         ZipFile: |
-           def lambda_handler(event, context):
-               print(event)
-               return 'Hello World!'
-     
-      
+          def lambda_handler(event, context):
+              print(event)
+              return "Hello World!"
