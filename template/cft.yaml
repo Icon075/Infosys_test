@@ -29,7 +29,7 @@ Resources:
 MyLambdaFunction:
     Type: AWS::Lambda::Function
     Properties:
-      Role: !GetAtt MyLambdaRole.Arn
+      Role: !GetAtt MyLambdaRole.Arn    #GetAtt- functn to get the arn property of the role
       Runtime: python3.9
       Handler: index.lambda_handler
       code:
