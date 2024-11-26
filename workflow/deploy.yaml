@@ -23,6 +23,6 @@ jobs:
       - name: Deploy CloudFormation Stack
         run: |
           aws cloudformation deploy \
-            --template-file templates/cft.yaml \
+            --template-file template/cft.yaml \
 
     
