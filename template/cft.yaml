@@ -1,3 +1,6 @@
+##--IAM Role--##
+##  https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
+
 AWSTemplateFormatVersion: "2010-09-09"
 Resources:
   MyLambdaRole:
@@ -14,16 +17,15 @@ Resources:
               - 'sts:AssumeRole'
       Path: /
       Policies:
-        - PolicyName: LambdaBasicExecutionPolicy
+        - PolicyName: root
           PolicyDocument:
             Version: "2012-10-17"
             Statement:
               - Effect: Allow
-                Action:
-                  - 'logs:CreateLogGroup'
-                  - 'logs:CreateLogStream'
-                  - 'logs:PutLogEvents'
+                Action: "*"
                 Resource: "*"
+
+# Lambda Function stack
 
   MyLambdaFunction:
     Type: 'AWS::Lambda::Function'
